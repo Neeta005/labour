@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -9,8 +8,8 @@ import Footer from './components/Footer';
 import SearchResults from './components/SearchResults';
 import WorkerProfileModal from './components/WorkerProfileModal';
 import BookingModal from './components/BookingModal';
-import LoginModal from './components/LoginModal';
-import SignupModal from './components/SignupModal';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
 import SmartMatchModal from './components/SmartMatchModal';
 import Dashboard from './components/Dashboard';
 import Toast from './components/Toast';
@@ -21,7 +20,7 @@ import PricingEstimatorModal from './components/PricingEstimatorModal';
 import { WORKERS } from './constants';
 import { Worker, User, Booking, ToastMessage } from './types';
 
-type View = 'home' | 'search' | 'dashboard';
+type View = 'home' | 'search' | 'dashboard' | 'login' | 'signup';
 
 const App: React.FC = () => {
     // Page view state
@@ -41,8 +40,6 @@ const App: React.FC = () => {
     const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
     const [isSmartMatchModalOpen, setIsSmartMatchModalOpen] = useState(false);
     const [isChatbotModalOpen, setIsChatbotModalOpen] = useState(false);
     const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
@@ -105,7 +102,7 @@ const App: React.FC = () => {
     const handleBookNow = (worker: Worker) => {
         if (!currentUser) {
             showToast('info', 'Please log in to book a service.');
-            setIsLoginModalOpen(true);
+            setView('login');
             return;
         }
         setSelectedWorker(worker);
@@ -158,7 +155,7 @@ const App: React.FC = () => {
             localStorage.setItem('urbanlink_user', JSON.stringify(user));
             const userBookings = JSON.parse(localStorage.getItem(`urbanlink_bookings_${user.id}`) || '[]');
             setBookings(userBookings);
-            setIsLoginModalOpen(false);
+            setView('dashboard');
             showToast('success', `Welcome back, ${user.name.split(' ')[0]}!`);
         } else {
              showToast('error', 'Invalid email or password.');
@@ -177,7 +174,7 @@ const App: React.FC = () => {
         setCurrentUser(newUser);
         localStorage.setItem('urbanlink_user', JSON.stringify(newUser));
         setBookings([]);
-        setIsSignupModalOpen(false);
+        setView('dashboard');
         showToast('success', `Welcome, ${name.split(' ')[0]}!`);
     };
 
@@ -195,6 +192,10 @@ const App: React.FC = () => {
 
     const renderContent = () => {
         switch (view) {
+            case 'login':
+                return <LoginPage onLogin={handleLogin} onSwitchToSignup={() => setView('signup')} onHomeClick={() => setView('home')} />;
+            case 'signup':
+                return <SignupPage onSignup={handleSignup} onSwitchToLogin={() => setView('login')} onHomeClick={() => setView('home')} />;
             case 'search':
                 return <SearchResults 
                             workers={searchResults} 
@@ -217,21 +218,25 @@ const App: React.FC = () => {
                 );
         }
     };
+    
+    const showHeaderFooter = view !== 'login' && view !== 'signup';
 
     return (
         <div className="bg-slate-950 text-white min-h-screen font-sans">
-            <Header 
-                currentUser={currentUser} 
-                onLoginClick={() => setIsLoginModalOpen(true)}
-                onSignupClick={() => setIsSignupModalOpen(true)}
-                onLogout={handleLogout}
-                onDashboardClick={() => { if(currentUser) setView('dashboard')}}
-                onHomeClick={() => setView('home')}
-            />
-            <main className="pt-20">
+            {showHeaderFooter && (
+              <Header 
+                  currentUser={currentUser} 
+                  onLoginClick={() => setView('login')}
+                  onSignupClick={() => setView('signup')}
+                  onLogout={handleLogout}
+                  onDashboardClick={() => { if(currentUser) setView('dashboard')}}
+                  onHomeClick={() => setView('home')}
+              />
+            )}
+            <main className={showHeaderFooter ? "pt-20" : ""}>
                 {renderContent()}
             </main>
-            <Footer />
+            {showHeaderFooter && <Footer />}
 
             {/* Modals */}
             <WorkerProfileModal 
@@ -245,18 +250,6 @@ const App: React.FC = () => {
                 isOpen={isPricingModalOpen}
                 onClose={() => setIsPricingModalOpen(false)}
                 worker={selectedWorker}
-            />
-            <LoginModal 
-                isOpen={isLoginModalOpen} 
-                onClose={() => setIsLoginModalOpen(false)} 
-                onLogin={handleLogin}
-                onSwitchToSignup={() => { setIsLoginModalOpen(false); setIsSignupModalOpen(true); }}
-            />
-            <SignupModal 
-                isOpen={isSignupModalOpen} 
-                onClose={() => setIsSignupModalOpen(false)} 
-                onSignup={handleSignup}
-                onSwitchToLogin={() => { setIsSignupModalOpen(false); setIsLoginModalOpen(true); }}
             />
             <SmartMatchModal 
                 isOpen={isSmartMatchModalOpen}
