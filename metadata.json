@@ -1,0 +1,8 @@
+{
+  "name": "Copy of UrbanLink",
+  "description": "A modern platform to connect homeowners with skilled local laborers for day-to-day tasks. Find electricians, plumbers, cleaners, and more with ease and confidence.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}

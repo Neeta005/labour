@@ -1,0 +1,118 @@
+
+import {
+    ElectricianIcon,
+    PlumberIcon,
+    CleanerIcon,
+    PainterIcon,
+    CarpenterIcon,
+    GardenerIcon,
+} from './components/icons';
+import { Worker, Category } from './types';
+
+export const CATEGORIES: Category[] = [
+    { name: 'Electrician', icon: ElectricianIcon },
+    { name: 'Plumber', icon: PlumberIcon },
+    { name: 'Cleaner', icon: CleanerIcon },
+    { name: 'Painter', icon: PainterIcon },
+    { name: 'Carpenter', icon: CarpenterIcon },
+    { name: 'Gardener', icon: GardenerIcon },
+];
+
+export const WORKERS: Worker[] = [
+    {
+        id: 1,
+        name: 'Rajesh Kumar',
+        service: 'Electrician',
+        location: 'Mumbai, Maharashtra',
+        rating: 4.9,
+        reviewCount: 124,
+        hourlyRate: 500,
+        imageUrl: 'https://images.unsplash.com/photo-1581092921462-6849a6e3a613?q=80&w=300',
+        verified: true,
+        description: 'Certified electrician with over 10 years of experience in residential and commercial wiring. I handle everything from minor repairs to complete installations.',
+        skills: ['Wiring', 'Lighting Installation', 'Fuse Box Repair', 'Appliance Repair', 'Inspections'],
+        reviews: [
+            { id: 1, author: 'Priya Sharma', avatar: 'https://i.pravatar.cc/150?img=1', date: '2 weeks ago', rating: 5, comment: 'Rajesh was very professional and fixed our wiring issue quickly. Highly recommended!' },
+            { id: 2, author: 'Amit Singh', avatar: 'https://i.pravatar.cc/150?img=2', date: '1 month ago', rating: 5, comment: 'Excellent service. He arrived on time and was very knowledgeable.' },
+        ],
+    },
+    {
+        id: 2,
+        name: 'Sunita Devi',
+        service: 'Plumber',
+        location: 'Delhi, NCR',
+        rating: 4.8,
+        reviewCount: 98,
+        hourlyRate: 450,
+        imageUrl: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=300',
+        verified: true,
+        description: 'Expert plumber specializing in leak detection, pipe fitting, and drainage solutions. I provide fast and reliable service for all your plumbing needs.',
+        skills: ['Leak Repair', 'Pipe Installation', 'Drain Cleaning', 'Water Heater', 'Fixture Installation'],
+        reviews: [
+            { id: 3, author: 'Vikram Patel', avatar: 'https://i.pravatar.cc/150?img=3', date: '3 weeks ago', rating: 5, comment: 'Sunita fixed our leaky pipe in no time. Very efficient and clean work.' },
+        ],
+    },
+    {
+        id: 3,
+        name: 'Anjali Mehta',
+        service: 'Cleaner',
+        location: 'Bangalore, Karnataka',
+        rating: 4.9,
+        reviewCount: 210,
+        hourlyRate: 350,
+        imageUrl: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=300',
+        verified: true,
+        description: 'Professional cleaning services for homes and offices. I use eco-friendly products to ensure a safe and sparkling clean environment.',
+        skills: ['Deep Cleaning', 'Office Cleaning', 'Window Washing', 'Floor Polishing', 'Sanitization'],
+        reviews: [
+            { id: 4, author: 'Sneha Reddy', avatar: 'https://i.pravatar.cc/150?img=4', date: '1 week ago', rating: 5, comment: 'Anjali and her team did a fantastic job with our apartment. It has never been this clean!' },
+            { id: 5, author: 'Rohan Joshi', avatar: 'https://i.pravatar.cc/150?img=5', date: '1 month ago', rating: 4, comment: 'Good service, but was a little late.' },
+        ],
+    },
+    {
+        id: 4,
+        name: 'Manoj Verma',
+        service: 'Painter',
+        location: 'Kolkata, West Bengal',
+        rating: 4.7,
+        reviewCount: 75,
+        hourlyRate: 400,
+        imageUrl: 'https://images.unsplash.com/photo-1596799351333-93c63d42ab82?q=80&w=300',
+        verified: false,
+        description: 'Experienced painter for interior and exterior projects. I focus on quality finishes and customer satisfaction.',
+        skills: ['Interior Painting', 'Exterior Painting', 'Wall Texturing', 'Wood Polishing'],
+        reviews: [
+            { id: 6, author: 'Deb Bannerjee', avatar: 'https://i.pravatar.cc/150?img=6', date: '4 days ago', rating: 5, comment: 'Manoj did a beautiful job painting our living room. Very meticulous.' },
+        ],
+    },
+    {
+        id: 5,
+        name: 'Suresh Gupta',
+        service: 'Carpenter',
+        location: 'Chennai, Tamil Nadu',
+        rating: 4.8,
+        reviewCount: 150,
+        hourlyRate: 550,
+        imageUrl: 'https://images.unsplash.com/photo-1579704278032-15f333333345?q=80&w=300',
+        verified: true,
+        description: 'Skilled carpenter for custom furniture, repairs, and installations. I work with precision and high-quality materials.',
+        skills: ['Custom Furniture', 'Cabinet Making', 'Door Installation', 'Wood Repair', 'Polishing'],
+        reviews: [],
+    },
+    {
+        id: 6,
+        name: 'Deepa Iyer',
+        service: 'Gardener',
+        location: 'Pune, Maharashtra',
+        rating: 4.9,
+        reviewCount: 88,
+        hourlyRate: 300,
+        imageUrl: 'https://images.unsplash.com/photo-1601602334739-0107d6a798b8?q=80&w=300',
+        verified: true,
+        description: 'Passionate gardener offering landscaping, maintenance, and plant care services. Let me help you create your dream garden.',
+        skills: ['Landscaping', 'Lawn Mowing', 'Pruning', 'Planting', 'Pest Control'],
+        reviews: [
+            { id: 7, author: 'Arjun Desai', avatar: 'https://i.pravatar.cc/150?img=7', date: '2 months ago', rating: 5, comment: 'Deepa transformed our backyard. She is very knowledgeable about plants.' },
+        ],
+    }
+];
